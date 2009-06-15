@@ -1,7 +1,7 @@
 Usage
 -----
 
-node "server.domain.com" inherits basenode {
+`node "server.domain.com" inherits basenode {
 	# physical interface
 	network::interface { "eth0":
 		hostname => "server.domain.com",
@@ -22,7 +22,7 @@ node "server.domain.com" inherits basenode {
 		broadcast => "1.2.3.255",
 		ensure => up
 	}
-}
+}`
 
 Miscellaneous Notes
 -------------------
