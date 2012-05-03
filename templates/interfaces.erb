@@ -1,0 +1,7 @@
+
+# Public IP configuration
+auto <%= interface %>
+iface <%= interface %> inet static
+	address <%= ipaddress %>
+	netmask <%= netmask %>
+	gateway <%= gateway %>

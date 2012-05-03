@@ -4,34 +4,28 @@ define network::alias(
 		$network,
 		$broadcast,
 		$ensure) {
-	$interface = $name
 
-	$onboot = $ensure ? {
-		up => "yes",
-		down => "no"
-	}
-
-	file { "/etc/sysconfig/network-scripts/ifcfg-$interface":
-		owner => root,
-		group => root,
-		mode => 600,
-		content => template("network/sysconfig/network-scripts/ifcfg.interface.alias.erb"),
-		alias => "ifcfg-$interface"
-	}
-
-	case $ensure {
-		up: {
-			exec { "/sbin/ifdown $interface; /sbin/ifup $interface":
-				subscribe => File["ifcfg-$interface"],
-				refreshonly => true
-			}
-		}
-
-		down: {
-			exec { "/sbin/ifdown $interface":
-				subscribe => File["ifcfg-$interface"],
-				refreshonly => true
-			}
-		}
-	}
+  case $::operatingsystem {
+    centos,fedora,rhel: {
+      network::alias::redhat{ $name:
+        ipaddress   => $ipaddress,
+        netmask     => $netmask,
+        network     => $network,
+        broadcast   => $broadcast,
+        ensure      => $ensure
+      }
+    }
+    debian,ubuntu: {
+      network::alias::debian{ $name:
+        ipaddress   => $ipaddress,
+        netmask     => $netmask,
+        network     => $network,
+        broadcast   => $broadcast,
+        ensure      => $ensure
+      }
+    }
+    default: {
+      err "${::operatingsystem} is not yet supported for the network module."
+    }
+  }
 }

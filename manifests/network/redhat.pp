@@ -1,0 +1,3 @@
+class network::redhat {
+  
+}
