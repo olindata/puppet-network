@@ -1,22 +1,16 @@
 define network::interface::debian(
-    $hostname,
+    $ensure,
     $ipaddress,
     $netmask,
-    $network,
-    $gateway = '',
-    $broadcast,
-    $macaddress,
-    $routes_file = '',
-    $ensure,
-    $order = 10) {
+    $hostname     = '',
+    $network      = '',
+    $gateway      = '',
+    $broadcast    = '',
+    $macaddress   = '',
+    $routes_file  = '',
+    $order        = 10) {
 
   $interface = $name
-
-  $onboot = $ensure ? {
-    up      => 'yes',
-    down    => 'no',
-    default => 'yes'
-  }
 
   concat::fragment { "network_interface_${name}":
     target  => '/etc/network/interfaces',
