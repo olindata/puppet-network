@@ -8,8 +8,7 @@ class network::debian {
     mode    => 0644, 
     owner   => 'root', 
     group   => 'root',
-    warn    => true,
-    order   => numeric,
+    warn    => false,
     notify  => Service['networking']
   }
   

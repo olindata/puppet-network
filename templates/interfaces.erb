@@ -2,8 +2,8 @@
 # Public IP configuration
 auto <%= interface %>
 iface <%= interface %> inet static
-	address <%= ipaddress %>
-	netmask <%= netmask %>
+  address <%= ipaddress %> 
+  netmask <%= netmask %>
 <% if gateway != '' -%>
   gateway <%= gateway %>
 <% end -%>
