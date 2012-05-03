@@ -1,4 +1,4 @@
-define network {
+class network {
 
   case $::operatingsystem {
     centos,fedora,rhel: {
