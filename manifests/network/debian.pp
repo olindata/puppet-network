@@ -15,7 +15,7 @@ class network::debian {
   # loopback interface is always present
   concat::fragment { 'network_interface_loopback':
     target => '/etc/network/interfaces', 
-    order  => 1,
+    order  => '01',
     source => 'puppet:///modules/network/interfaces_loopback'
   }
   
