@@ -1,13 +1,13 @@
 define network::interface(
-		$hostname,
-		$ipaddress,
+    $ensure,
+    $ipaddress,
 		$netmask,
-		$network,
-		$gateway = "",
-		$broadcast,
-		$macaddress,
-		$routes_file = "",
-		$ensure) {
+    $hostname    = '',
+		$network     = '',
+		$gateway     = '',
+		$broadcast   = '',
+		$macaddress  = '',
+		$routes_file = '') {
 
   case $::operatingsystem {
     centos,fedora,rhel: {
