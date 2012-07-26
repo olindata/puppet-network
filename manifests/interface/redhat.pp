@@ -3,37 +3,37 @@ define network::interface::redhat(
     $ipaddress,
     $netmask,
     $network,
-    $gateway = "",
+    $gateway = '',
     $broadcast,
     $macaddress,
-    $routes_file = "",
+    $routes_file = '',
     $ensure) {
 
   $interface = $name
 
   $onboot = $ensure ? {
-    up => "yes",
-    down => "no"
+    up => 'yes',
+    down => 'no',
   }
 
-  file { "/etc/sysconfig/network-scripts/ifcfg-$interface":
+  file { "/etc/sysconfig/network-scripts/ifcfg-${interface}":
     owner => root,
     group => root,
     mode => 600,
     content =>
-      template("network/sysconfig/network-scripts/ifcfg.interface.erb"),
+      template('network/sysconfig/network-scripts/ifcfg.interface.erb'),
     ensure => present,
-    alias => "ifcfg-$interface"
+    alias => "ifcfg-${interface}"
   }
 
   if $gateway {
-    file { "/etc/sysconfig/network":
+    file { '/etc/sysconfig/network':
       owner => root,
       group => root,
       mode => 600,
-      content => template("network/sysconfig/network.erb"),
+      content => template('network/sysconfig/network.erb'),
       ensure => present,
-      alias => "network"
+      alias => 'network'
     }
   }
 
@@ -41,35 +41,35 @@ define network::interface::redhat(
     up: {
       if $routes_file {
         $subscribes = [
-          File["ifcfg-$interface"],
-          File["network"],
-          File["route-$interface"]
+          File["ifcfg-${interface}"],
+          File['network'],
+          File["route-${interface}"]
         ]
 
-        file { "/etc/sysconfig/network-scripts/route-$interface":
+        file { "/etc/sysconfig/network-scripts/route-${interface}":
           owner => root,
           group => root,
           mode => 600,
-          source => "puppet://$servername/network/sysconfig/network-scripts/route-$interface",
+          source => "puppet://${::servername}/network/sysconfig/network-scripts/route-${interface}",
           ensure => present,
-          alias => "route-$interface"
+          alias => "route-${interface}"
         }
       } else {
         $subscribes = [
-          File["ifcfg-$interface"],
-          File["network"]
+          File["ifcfg-${interface}"],
+          File['network']
         ]
       }
 
-      exec { "/sbin/ifdown $interface; /sbin/ifup $interface":
+      exec { "/sbin/ifdown ${interface}; /sbin/ifup ${interface}":
         subscribe => $subscribes,
         refreshonly => true
       }
     }
 
     down: {
-      exec { "/sbin/ifdown $interface":
-        subscribe => File["ifcfg-$interface"],
+      exec { "/sbin/ifdown ${interface}":
+        subscribe => File["ifcfg-${interface}"],
         refreshonly => true
       }
     }
