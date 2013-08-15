@@ -1,10 +1,18 @@
 DEVICE=<%= interface %>
 BOOTPROTO=static
+<% if broadcast != '' -%><% then -%>
 BROADCAST=<%= broadcast %>
+<% end -%>
+<% if macaddress != '' -%><% then -%>
 HWADDR=<%= macaddress %>
+<% end -%>
 IPADDR=<%= ipaddress %>
 NETMASK=<%= netmask %>
+<% if network != '' -%><% then -%>
 NETWORK=<%= network %>
+<% end -%>
 ONBOOT=<%= onboot %>
 IPV6INIT=no
 TYPE=Ethernet
+
+
