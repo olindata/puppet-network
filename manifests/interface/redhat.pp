@@ -26,15 +26,13 @@ define network::interface::redhat(
     alias => "ifcfg-${interface}"
   }
 
-  if $gateway {
-    file { '/etc/sysconfig/network':
-      owner => root,
-      group => root,
-      mode => 600,
-      content => template('network/sysconfig/network.erb'),
-      ensure => present,
-      alias => 'network'
-    }
+  file { '/etc/sysconfig/network':
+    owner => root,
+    group => root,
+    mode => 600,
+    content => template('network/sysconfig/network.erb'),
+    ensure => present,
+    alias => 'network'
   }
 
   case $ensure {
