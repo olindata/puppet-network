@@ -1,4 +1,4 @@
-class network::redhat($gateway) {
+class network::redhat($gateway = '') {
 
   file { '/etc/sysconfig/network':
     owner => root,
