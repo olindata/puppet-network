@@ -1,6 +1,6 @@
 NETWORKING=yes
 NETWORKING_IPV6=no
 HOSTNAME=<%= hostname %>
-<% if gateway <> '' -%><% then -%>
+<% if gateway != '' -%><% then -%>
 GATEWAY=<%= gateway %>
 <% end -%>
