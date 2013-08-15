@@ -3,7 +3,6 @@ define network::interface::redhat(
     $ipaddress,
     $netmask,
     $network,
-    $gateway = '',
     $broadcast,
     $macaddress,
     $routes_file = '',
@@ -24,15 +23,6 @@ define network::interface::redhat(
       template('network/sysconfig/network-scripts/ifcfg.interface.erb'),
     ensure => present,
     alias => "ifcfg-${interface}"
-  }
-
-  file { '/etc/sysconfig/network':
-    owner => root,
-    group => root,
-    mode => 600,
-    content => template('network/sysconfig/network.erb'),
-    ensure => present,
-    alias => 'network'
   }
 
   case $ensure {

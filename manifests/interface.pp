@@ -16,7 +16,6 @@ define network::interface(
         ipaddress   => $ipaddress,
         netmask     => $netmask,
         network     => $network,
-        gateway     => $gateway,
         broadcast   => $broadcast,
         macaddress  => $macaddress,
         routes_file => $routes_file,
