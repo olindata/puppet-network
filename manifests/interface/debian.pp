@@ -2,6 +2,7 @@ define network::interface::debian(
     $ensure,
     $ipaddress,
     $netmask,
+    $type,
     $hostname     = '',
     $network      = '',
     $gateway      = '',
@@ -9,6 +10,8 @@ define network::interface::debian(
     $macaddress   = '',
     $routes_file  = '',
     $order        = 10) {
+      
+  validate_re($type, '^(static|loopback)$')
 
   $interface = $name
 
