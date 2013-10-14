@@ -1,14 +1,14 @@
 
 # Static IP configuration
-auto <%= interface %>
-<% case type 
+auto <%= @interface %>
+<% case @type 
  when 'static' -%>
-iface <%= interface %> inet static
-  address <%= ipaddress %> 
-  netmask <%= netmask %>
+iface <%= @interface %> inet static
+  address <%= @ipaddress %> 
+  netmask <%= @netmask %>
 <% when 'loopback' -%>
-iface <%= interface %> inet loopback
+iface <%= @interface %> inet loopback
 <% end -%>
-<% if gateway != '' -%>
-  gateway <%= gateway %>
+<% if @gateway != '' -%>
+  gateway <%= @gateway %>
 <% end -%>
