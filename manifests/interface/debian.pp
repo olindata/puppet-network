@@ -3,13 +3,14 @@ define network::interface::debian(
     $ipaddress,
     $netmask,
     $type,
-    $hostname     = '',
-    $network      = '',
-    $gateway      = '',
-    $broadcast    = '',
-    $macaddress   = '',
-    $routes_file  = '',
-    $order        = 10) {
+    $hostname        = '',
+    $network         = '',
+    $gateway         = '',
+    $broadcast       = '',
+    $macaddress      = '',
+    $routes_file     = '',
+    $order           = 10,
+    $custom_template = '') {
       
   validate_re($type, '^(static|loopback)$')
 

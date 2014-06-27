@@ -8,7 +8,8 @@ define network::interface(
 		$broadcast   = '',
 		$macaddress  = '',
 		$routes_file = '',
-		$type        = 'static') {
+		$type        = 'static',
+    $custom_template = '') {
 
   case $::operatingsystem {
     centos,fedora,rhel: {
@@ -35,6 +36,7 @@ define network::interface(
         routes_file => $routes_file,
         ensure      => $ensure,
         type        => $type,
+        custom_template => $custom_template,
       }
     }
     default: {

@@ -12,3 +12,6 @@ iface <%= @interface %> inet loopback
 <% if @gateway != '' -%>
   gateway <%= @gateway %>
 <% end -%>
+<% if @custom_template  -%>
+<%= scope.function_template([@custom_template]) -%>
+<% end -%>
